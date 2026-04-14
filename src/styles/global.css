@@ -79,9 +79,6 @@ body::before {
   font-weight: 400;
 }
 
-/* ==========================================================================
-   SISTEMA DE SECCIONES (Arquitectura Limpia)
-   ========================================================================== */
 
 /* 1. SECCIÓN PRINCIPAL (Mantiene los puntos del body transparentando) */
 .section-primary {

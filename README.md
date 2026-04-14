@@ -1,46 +1,116 @@
-# Astro Starter Kit: Basics
+# Portfolio Website - Triad Systems
 
-```sh
-pnpm create astro@latest -- --template basics
+Sitio web de portafolio profesional construido con Astro, enfocado en mostrar servicios, stack tecnologico, proyectos destacados, equipo y una seccion de contacto.
+
+Este proyecto esta pensado como base para marca personal, agencia o estudio de software que quiera una presencia moderna, rapida y facil de mantener.
+
+## De que trata este proyecto
+
+La pagina principal incluye:
+
+- Hero con propuesta de valor y llamadas a la accion.
+- Carrusel de tecnologias.
+- Seccion de proyectos destacados con categorias, stack y enlaces.
+- Seccion de equipo.
+- Formulario de contacto.
+- Header con navegacion responsiva y animaciones de scroll.
+
+## Stack principal
+
+- Astro 6
+- CSS global + estilos por componente (Astro)
+- astro-icon + iconos via Iconify/Simple Icons
+- PNPM como gestor de paquetes
+
+## Requisitos
+
+- Node.js 22.12.0 o superior
+- PNPM instalado globalmente
+
+## Instalacion y ejecucion
+
+1. Clona el repositorio.
+2. Instala dependencias:
+
+```bash
+pnpm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+3. Ejecuta en desarrollo:
 
-## 🚀 Project Structure
+```bash
+pnpm dev
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+4. Abre en tu navegador:
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+http://localhost:4321
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Scripts disponibles
 
-## 🧞 Commands
+```bash
+pnpm dev      # Servidor local
+pnpm build    # Build de produccion
+pnpm preview  # Vista previa del build
+pnpm astro    # Comandos de Astro CLI
+```
 
-All commands are run from the root of the project, from a terminal:
+## Estructura del proyecto
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```text
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── layout/
+│   │   ├── sections/
+│   │   └── ui/
+│   ├── data/
+│   ├── layouts/
+│   ├── pages/
+│   └── styles/
+├── astro.config.mjs
+├── package.json
+└── README.md
+```
 
-## 👀 Want to learn more?
+## Personalizacion rapida
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Si quieres adaptar el proyecto a tu marca o cliente:
+
+- Cambia textos y secciones en `src/components/sections/`.
+- Actualiza proyectos en `src/data/projects.js`.
+- Actualiza equipo en `src/data/team.js`.
+- Actualiza tecnologias en `src/data/technologies.js`.
+- Ajusta la identidad visual en `src/styles/global.css`.
+
+## Mejoras y sugerencias
+
+Las mejoras y sugerencias son bienvenidas.
+
+Si quieres contribuir:
+
+1. Haz un fork del repositorio.
+2. Crea una rama con tu mejora:
+
+```bash
+git checkout -b feature/mi-mejora
+```
+
+3. Realiza tus cambios y haz commit.
+4. Abre un Pull Request explicando:
+- Que problema resuelve.
+- Que cambio propone.
+- Como probarlo.
+
+Tambien puedes abrir un Issue para:
+
+- Reportar errores.
+- Proponer nuevas funcionalidades.
+- Sugerir mejoras de diseño, rendimiento o accesibilidad.
+
+Toda sugerencia constructiva es bienvenida para seguir mejorando el proyecto.
+

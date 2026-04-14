@@ -1,9 +1,7 @@
 ---
-// src/components/sections/Team.astro
 import { team } from '../../data/team.js';
 ---
 
-<!-- Agregamos la clase "section-secondary" de tu global.css para aprovechar el fondo limpio -->
 <section id="team" class="team-section section-secondary">
   <div class="container">
     <header class="section-header">
@@ -64,11 +62,10 @@ import { team } from '../../data/team.js';
 <style>
   /* === CONTENEDOR === */
   .team-section {
-    padding: 8rem 0; /* Un poco menos de padding para equilibrar con el global.css */
-    /* La clase .section-secondary en global.css ya se encarga del fondo oscuro sin puntos */
+    padding: 8rem 0; 
   }
 
-  /* === HEADER (Centrado para coherencia con Projects) === */
+  /* === HEADER === */
   .section-header {
     text-align: center;
     margin-bottom: 5rem;
@@ -233,7 +230,7 @@ import { team } from '../../data/team.js';
     max-width: 280px; /* Mantiene la bio simétrica */
   }
 
-  /* === REDES SOCIALES (Corrección de Contraste) === */
+  /* === REDES SOCIALES=== */
   .member-social {
     display: flex;
     gap: 1rem;
