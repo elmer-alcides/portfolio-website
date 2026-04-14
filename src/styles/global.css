@@ -1,0 +1,145 @@
+/* --- DESIGN TOKENS (Textura y Profundidad) --- */
+:root {
+  /* Fondo principal profundo */
+  --bg-dark: #08080a; 
+  /* Hacemos la tarjeta levísimamente más clara para que destaque del fondo */
+  --bg-card: #131316; 
+
+  /* Colores de Acento (LUZ) */
+  --accent-purple: #a855f7;
+  --accent-light: #d8b4fe;
+
+  /* Texto */
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.08); /* Borde un poco más visible */
+
+  /* Fuentes */
+  --font-serif: "Instrument Serif", "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace; 
+}
+
+/* --- RESET & BASE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  background-color: var(--bg-dark);
+}
+
+body {
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+  background-color: var(--bg-dark);
+  
+  /* Patrón de puntos global: limpio y técnico */
+  background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 32px 32px; 
+  position: relative;
+}
+
+/* Iluminación Global (Glow superior que unifica el sitio) */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  background: radial-gradient(circle at 50% -20%, rgba(168, 85, 247, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- UTILITY CLASSES --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.serif-font {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   SISTEMA DE SECCIONES (Arquitectura Limpia)
+   ========================================================================== */
+
+/* 1. SECCIÓN PRINCIPAL (Mantiene los puntos del body transparentando) */
+.section-primary {
+  position: relative;
+}
+
+/* 2. ZONAS DE RESPIRO (Secondary: Team, Contact) */
+.section-secondary {
+  background-color: #050507; /* Fondo opaco, tapa los puntos */
+  background-image: none; 
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 6rem 0; 
+  position: relative;
+  z-index: 1;
+}
+
+.section-secondary h2 {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.section-secondary p {
+  color: var(--text-muted);
+}
+
+/* Cajas estilo terminal para las zonas secundarias */
+.section-secondary .raw-box {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px; 
+  transition: all 0.3s ease;
+  padding: 2rem;
+}
+
+.section-secondary .raw-box:hover {
+  border-color: rgba(255, 255, 255, 0.15); 
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* 3. SECCIÓN DE CIERRE (Footer) */
+.section-stealth {
+  background-color: #030305;
+  background-image: none;
+  padding: 4rem 0;
+}
+
+/* Efecto especial para Contacto */
+.glow-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 300px;
+  background: radial-gradient(circle at 50% 100%, rgba(168, 85, 247, 0.08), transparent 70%);
+  pointer-events: none;
+}

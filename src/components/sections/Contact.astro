@@ -1,0 +1,225 @@
+---
+// src/components/sections/Contact.astro
+---
+
+<section id="contact" class="section-secondary contact-section">
+  <!-- Efecto de luz desde el suelo -->
+  <div class="glow-bottom" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="contact-wrapper">
+      <header class="contact-header">
+        <h2 class="contact-title">Iniciemos un <span class="serif-font">Proyecto</span></h2>
+        <p class="contact-subtitle">
+          ¿Tienes una visión técnica desafiante? Conversemos sobre arquitectura, escalabilidad y ejecución.
+        </p>
+      </header>
+
+      <!-- Usamos raw-box de tu global.css, pero refinamos el interior -->
+      <div class="raw-box form-container">
+        <form class="contact-form">
+          <div class="input-group">
+            <label for="name">Nombre completo</label>
+            <input type="text" id="name" name="name" placeholder="Ej. Jane Doe" required autocomplete="name" />
+          </div>
+
+          <div class="input-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required autocomplete="email" />
+          </div>
+
+          <div class="input-group full-width">
+            <label for="message">Mensaje del sistema</label>
+            <textarea id="message" name="message" rows="4" placeholder="Describe los objetivos técnicos de tu proyecto..." required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span>Enviar Mensaje</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="send-icon">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* === CONTENEDOR PRINCIPAL === */
+  .contact-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-wrapper {
+    max-width: 800px; /* Un poco más estrecho para que el texto del textarea no sea kilométrico */
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* === HEADER === */
+  .contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .badge-mono {
+    font-family: var(--font-mono, monospace);
+    color: var(--accent-light, #d8b4fe); /* Color más brillante */
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    font-weight: 600;
+  }
+
+  .contact-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin: 1rem 0;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+  }
+
+  /* Recuperamos el gradiente oficial para mantener la identidad visual */
+  .serif-font {
+    font-family: var(--font-serif, "Playfair Display", serif);
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--accent-light, #d8b4fe) 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 0.05em;
+    display: inline-block;
+  }
+
+  .contact-subtitle {
+    color: #a1a1aa;
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
+
+  /* === FORMULARIO ESTILO TERMINAL PREMIUM === */
+  .form-container {
+    padding: 2.5rem; /* Más respiro interior */
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+  }
+
+  .full-width {
+    grid-column: span 2;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .input-group label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #a1a1aa; /* Accesibilidad mejorada (Gris claro) */
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .input-group input, 
+  .input-group textarea {
+    background: rgba(255, 255, 255, 0.03); /* Ligeramente más visible */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px; /* Bordes un poco más suaves */
+    padding: 1rem 1.25rem;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    /* Evita que el usuario rompa el layout al estirar el textarea */
+    resize: vertical; 
+  }
+
+  .input-group input::placeholder,
+  .input-group textarea::placeholder {
+    color: #52525b; /* Zinc 600 */
+  }
+
+  /* Focus Ring de Alta Calidad */
+  .input-group input:focus, 
+  .input-group textarea:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-purple, #a855f7);
+    /* El input emite un ligero brillo al estar activo */
+    box-shadow: 0 0 0 1px var(--accent-purple, #a855f7),
+                0 0 15px -5px rgba(168, 85, 247, 0.3);
+  }
+
+  /* === BOTÓN DE ENVÍO === */
+  .submit-btn {
+    grid-column: span 2;
+    background: #ffffff;
+    color: #09090b;
+    border: 1px solid #ffffff;
+    padding: 1rem;
+    border-radius: 10px; /* Match con los inputs */
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover {
+    background: #e4e4e7;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(255, 255, 255, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0); /* Efecto de "clic" real */
+  }
+
+  /* Micro-interacción del avión de papel */
+  .send-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .submit-btn:hover .send-icon {
+    transform: translate(3px, -3px);
+  }
+
+  /* === EFECTO DE SUELO === */
+  .glow-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw; /* Expande la luz a toda la pantalla */
+    height: 400px;
+    background: radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .contact-form { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .submit-btn { grid-column: span 1; }
+    .form-container { padding: 1.5rem; }
+  }
+</style>

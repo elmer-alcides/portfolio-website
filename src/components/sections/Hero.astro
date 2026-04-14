@@ -1,0 +1,254 @@
+---
+// src/components/sections/Hero.astro
+---
+
+<section class="hero">
+  <!-- Fondo Atmosférico (Glow mejorado) -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="orb orb-primary"></div>
+    <div class="orb orb-secondary"></div>
+  </div>
+
+  <div class="container hero-content">
+    <!-- Badge Pulido -->
+    <div class="badge-container">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        <span class="badge-text">Disponible para nuevos proyectos</span>
+      </div>
+    </div>
+
+    <!-- Tipografía con Text-Wrap Balance y sin <br> forzados -->
+    <h1 class="hero-title">
+      Transformamos ideas en
+      <span class="serif-text">experiencias</span> 
+      extraordinarias
+    </h1>
+
+    <p class="hero-subtitle">
+      Ingeniería de software de alta precisión y diseño de sistemas escalables para la era digital.
+    </p>
+
+    <!-- Botones con Micro-interacciones premium -->
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">Ver Proyectos</a>
+      <a href="#contact" class="btn btn-glass">Contáctame</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* === CONTENEDOR PRINCIPAL === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--bg-dark, #09090b);
+    overflow: hidden;
+    padding: 0 1.5rem;
+  }
+
+  /* === FONDO ATMOSFÉRICO === */
+  .ambient-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px); /* Desenfoque más suave */
+    opacity: 0.15; 
+    animation: float 20s infinite alternate ease-in-out;
+  }
+
+  .orb-primary {
+    top: -10%;
+    left: 20%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--accent-purple, #a855f7);
+  }
+
+  .orb-secondary {
+    bottom: -20%;
+    right: 10%;
+    width: 45vw;
+    height: 45vw;
+    background: #ec4899; /* Toque magenta para enriquecer el glow */
+    animation-delay: -5s;
+  }
+
+  /* === CONTENIDO === */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 1000px;
+    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* === BADGE (ETIQUETA) === */
+  .badge-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .badge:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .badge-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #e4e4e7;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-light, #c084fc);
+    border-radius: 50%;
+    box-shadow: 0 0 12px 2px var(--accent-purple, #a855f7);
+    position: relative;
+  }
+
+  .pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-light, #c084fc);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* === TIPOGRAFÍA DE ALTO NIVEL === */
+  .hero-title {
+    font-size: clamp(3rem, 8vw + 1rem, 6.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    text-wrap: balance; /* Magia moderna: el navegador calcula el salto de línea perfecto */
+  }
+
+  .serif-text {
+    font-family: var(--font-serif, "Playfair Display", serif);
+    font-style: italic;
+    font-weight: 500;
+    /* Gradiente vibrante que atrapa la mirada */
+    background: linear-gradient(135deg, var(--accent-light, #d8b4fe) 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 0.05em;
+    display: inline-block; /* Previene recortes en el italic en Safari */
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: #a1a1aa; /* Gris neutro elegante */
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    font-weight: 400;
+    text-wrap: balance; /* Adiós al span rígido, el texto fluye natural */
+  }
+
+  /* === BOTONES (CALL TO ACTION) === */
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 0.8rem 2rem;
+    border-radius: 9999px; /* Formato píldora premium */
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 0 1px #ffffff;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    background: #e4e4e7;
+    box-shadow: 0 8px 25px -5px rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* === KEYFRAMES === */
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(5%, 8%); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 640px) {
+    .hero {
+      padding: 0 1.25rem;
+    }
+    .hero-actions { 
+      flex-direction: column; 
+      width: 100%; 
+    }
+    .btn { 
+      width: 100%; 
+    }
+  }
+</style>

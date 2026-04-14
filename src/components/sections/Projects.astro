@@ -1,0 +1,316 @@
+---
+// src/components/sections/Projects.astro
+import { projects } from '../../data/projects.js';
+
+const getIconUrl = (tag: string) => {
+  const TAG_COLORS: Record<string, string> = {
+    Rust: 'dea97c', AWS: 'ff9900', Docker: '2496ed', TypeScript: '3e8fd4',
+    'Node.js': '6dbf67', GraphQL: 'e10098', Python: '4b93cc', TensorFlow: 'ff8f00', FastAPI: '00c4a1'
+  };
+  let slug = tag.toLowerCase().replace('.', 'dot').replace(' ', '');
+  if (tag === 'AWS') slug = 'amazonaws';
+  if (tag === 'Node.js') slug = 'nodedotjs';
+  
+  return `https://cdn.simpleicons.org/${slug}/${TAG_COLORS[tag] || 'a855f7'}`;
+};
+---
+
+<section id="projects" class="projects-section">
+  <div class="container">
+    <header class="section-header">
+      <h2 class="section-title">
+        Proyectos <span class="serif-font">Destacados</span>
+      </h2>
+      <p class="section-subtitle">Construidos con precisión, diseñados para escalar.</p>
+    </header>
+
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <article class="project-card">
+          <!-- Imagen con efecto máscara mejorado -->
+          <div class="card-image-container">
+            <img src={project.image} alt={`Captura del proyecto ${project.title}`} class="card-image" loading="lazy" />
+            <div class="image-overlay"></div>
+          </div>
+
+          <div class="card-body">
+            <!-- Meta (Categoría y Año) -->
+            <div class="card-meta">
+              <span class="category">{project.category}</span>
+              <span class="separator">/</span>
+              <span class="year">{project.year}</span>
+            </div>
+
+            <h3 class="card-title">{project.title}</h3>
+            <p class="card-description">{project.description}</p>
+
+            <!-- Tech Stack en formato "Píldoras" premium -->
+            <div class="tech-stack">
+              {project.tags.map((tag) => (
+                <div class="tech-badge">
+                  <img src={getIconUrl(tag)} alt="" class="tech-icon" onerror="this.style.display='none'" />
+                  <span class="tech-name">{tag}</span>
+                </div>
+              ))}
+            </div>
+
+            <!-- Footer con enlaces -->
+            <footer class="card-footer">
+              <a href={project.repoUrl} class="footer-link" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                  <path d="M9 18c-4.51 2-5-2-7-2"/>
+                </svg>
+                Código
+              </a>
+              {project.liveUrl && (
+                <a href={project.liveUrl} class="footer-link live" target="_blank" rel="noopener noreferrer">
+                  <span>Visitar Web</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+                    <path d="M7 17 17 7"/>
+                    <path d="M7 7h10v10"/>
+                  </svg>
+                </a>
+              )}
+            </footer>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* === CONTENEDOR DE SECCIÓN === */
+  .projects-section {
+    padding: 8rem 0;
+    position: relative;
+    z-index: 1;
+    background-color: transparent; /* Deja ver los puntos del global.css */
+  }
+
+  /* Luz de ambiente sutil (Glow) detrás de las tarjetas */
+  .projects-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%);
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* === HEADER DE SECCIÓN === */
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+  }
+
+  .serif-font {
+    font-family: var(--font-serif, "Playfair Display", serif);
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--accent-light, #d8b4fe) 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 0.05em;
+    display: inline-block;
+  }
+
+  .section-subtitle {
+    color: #a1a1aa;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    font-weight: 400;
+  }
+
+  /* === GRID === */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  /* === TARJETA (GLASSMORPHISM PRO) === */
+  .project-card {
+    background: var(--bg-card, #131316); 
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.15),
+                0 0 15px -3px rgba(168, 85, 247, 0.1);
+  }
+
+  /* === IMAGEN === */
+  .card-image-container {
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.7) brightness(0.7);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+  }
+
+  .project-card:hover .card-image {
+    transform: scale(1.05);
+    filter: saturate(1.1) brightness(0.9);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, var(--bg-card, #131316) 100%);
+  }
+
+  /* === CUERPO DE LA TARJETA === */
+  .card-body {
+    padding: 0 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    z-index: 2;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+  }
+
+  .category { color: var(--accent-light, #c084fc); }
+  .separator { color: rgba(255, 255, 255, 0.2); }
+  .year { color: #71717a; }
+
+  .card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    color: #a1a1aa;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+
+  /* === TECH STACK === */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    margin-bottom: 2rem;
+  }
+
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .project-card:hover .tech-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .tech-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
+
+  .tech-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #e4e4e7;
+  }
+
+  /* === FOOTER === */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #a1a1aa;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: #ffffff;
+  }
+
+  .footer-link.live {
+    color: var(--accent-light, #d8b4fe);
+  }
+
+  .footer-link.live:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(216, 180, 254, 0.5);
+  }
+
+  .arrow-icon {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .footer-link.live:hover .arrow-icon {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid { 
+      grid-template-columns: 1fr; 
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+</style>

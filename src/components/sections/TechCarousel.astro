@@ -1,0 +1,178 @@
+---
+// src/components/sections/TechCarousel.astro
+import { technologies } from "../../data/technologies";
+---
+
+<section class="tech-stack-section">
+  <div class="container">
+    <h2 class="section-subtitle">
+      Tecnologías que impulsan nuestro código
+    </h2>
+  </div>
+
+  <!-- El contenedor sale del 'container' para ocupar el 100% del ancho de la pantalla -->
+  <div class="marquee-wrapper">
+    <div class="marquee-content">
+      {/* Primera iteración */}
+      {technologies.map((tech) => (
+        <div class="tech-item" style={`--hover-color: ${tech.color}`}>
+          <img
+            src={tech.iconUrl}
+            alt={`${tech.name} logo`}
+            class="tech-icon"
+            loading="lazy"
+            width="32"
+            height="32"
+          />
+          <span class="tech-name">{tech.name}</span>
+        </div>
+      ))}
+
+      {/* Segunda iteración (Clon para el loop infinito) */}
+      {technologies.map((tech) => (
+        <div class="tech-item" aria-hidden="true" style={`--hover-color: ${tech.color}`}>
+          <img
+            src={tech.iconUrl}
+            alt=""
+            class="tech-icon"
+            loading="lazy"
+            width="32"
+            height="32"
+            onerror="this.style.display='none'"
+          />
+          <span class="tech-name">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech-stack-section {
+    padding: 6rem 0;
+    background-color: var(--bg-dark, #09090b);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtítulo más legible y premium */
+  .section-subtitle {
+    text-align: center;
+    color: #71717a; /* Un gris más claro para mejor legibilidad */
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-bottom: 3.5rem;
+  }
+
+  /* Envoltorio a pantalla completa para el carrusel */
+  .marquee-wrapper {
+    width: 100%;
+    /* Efecto de desvanecimiento lateral mucho más suave */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    );
+  }
+
+  .marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem; /* Reducido un poco para que no se vea tan vacío en monitores grandes */
+    width: max-content;
+    animation: scroll 40s linear infinite;
+    /* Aceleración por hardware (GPU) para máxima fluidez */
+    will-change: transform; 
+  }
+
+  /* Pausar animación al interactuar */
+  .marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+  }
+
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    filter: grayscale(1) opacity(0.5); /* Más opaco por defecto para el modo sigilo */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    border-radius: 12px;
+  }
+
+  /* Efecto Hover Premium */
+  .tech-item:hover {
+    filter: grayscale(0) opacity(1);
+    transform: translateY(-4px) scale(1.05);
+    /* Le damos un fondo sutil al item al hacer hover para enmarcarlo */
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0 20px -5px var(--hover-color);
+  }
+
+  .tech-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .tech-name {
+    color: #a1a1aa;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  /* Aquí usamos la variable que inyectaste en el HTML */
+  .tech-item:hover .tech-name {
+    color: var(--hover-color, #ffffff);
+  }
+
+  /* Animación de scroll */
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 768px) {
+    .marquee-wrapper {
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+      );
+    }
+    .marquee-content {
+      gap: 2.5rem;
+    }
+    .tech-name {
+      font-size: 1rem;
+    }
+    .tech-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
